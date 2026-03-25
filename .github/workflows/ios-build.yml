@@ -1,0 +1,38 @@
+name: Build iOS
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 可选：指定 Xcode 版本（可去掉，让系统自动选）
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '16.4.0'   # 根据运行器可用版本调整
+
+      # 列出项目文件（调试用，可删除）
+      - name: List project files
+        run: ls -la
+
+      # 执行 Archive 构建（不签名，仅验证编译）
+      - name: Build Archive
+        run: |
+          xcodebuild archive \
+            -project "swiftui-elements.xcodeproj" \
+            -scheme "swiftui-elements" \
+            -destination "generic/platform=iOS" \
+            -archivePath build/App.xcarchive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
