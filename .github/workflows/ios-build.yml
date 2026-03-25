@@ -36,3 +36,21 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
+
+      # 新增：导出 IPA（同样禁用签名）
+      - name: Export IPA
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath build/App.xcarchive \
+            -exportPath build/ipa \
+            -exportOptionsPlist ExportOptions.plist \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      # 新增：上传 IPA 作为 Artifact，这样你就能下载到它
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: App-IPA
+          path: build/ipa/*.ipa
