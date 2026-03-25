@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>method</key>
+    <string>development</string>   <!-- 如果只是测试导出，用 development 即可 -->
+    <key>teamID</key>
+    <string>YOUR_TEAM_ID</string>  <!-- 需要替换成你的 Team ID，可从 Apple Developer 获取 -->
+    <key>signingStyle</key>
+    <string>automatic</string>     <!-- 自动签名，无需手动指定证书 -->
+</dict>
+</plist>
